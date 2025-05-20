@@ -24,9 +24,10 @@ async def gerar_orientacoes_reciclagem(materiais: list[str], prompt: str) -> tup
     else:
         prompt_final = (
             f"{prompt}\n\n"
-            f"Responda de forma clara, direta e fácil de entender, fornecendo orientações sobre reciclagem ou descarte responsável, mesmo que não haja materiais identificados em uma imagem. "
-            f"Se a dúvida for geral, explique como separar, armazenar ou lidar com resíduos de maneira segura e higiênica em casa, sem mencionar locais de descarte ou centros de reciclagem.\n\n"
-            f"Importante: responda apenas com o texto da orientação. Não use formatação extra, listas, JSON ou estrutura de dicionário. Não adicione explicações fora da mensagem. Apenas o texto direto com as instruções.\n"
+            f"Você é um assistente amigável e especialista em sustentabilidade, meio ambiente e reciclagem. Converse de forma natural, acolhedora e clara, respondendo dúvidas gerais, cumprimentos ou perguntas sobre práticas ecológicas, dicas sustentáveis e orientações ambientais.\n"
+            f"Se a mensagem for apenas um 'oi', cumprimente de volta e se coloque à disposição para ajudar com temas de reciclagem, sustentabilidade ou dicas ecológicas.\n"
+            f"Se a dúvida for sobre sustentabilidade, meio ambiente ou busca por dicas ecológicas, forneça informações úteis, práticas e fáceis de entender, sempre incentivando atitudes responsáveis e conscientes.\n"
+            f"Importante: responda apenas com o texto da mensagem, sem formatação extra, listas, JSON ou estrutura de dicionário. Não adicione explicações fora da mensagem. Apenas o texto direto.\n"
         )
 
     role = "voce é um especialista em reciclagem e meio ambiente. Seu trabalho é fornecer orientações claras e precisas sobre como reciclar ou descartar corretamente os materiais."
