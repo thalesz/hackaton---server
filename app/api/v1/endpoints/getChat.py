@@ -11,15 +11,23 @@ import json
 router = APIRouter()
 
 async def gerar_orientacoes_reciclagem(materiais: list[str], prompt: str) -> tuple[str, str]:
-    materiais_texto = ", ".join(materiais) if materiais else "nenhum material identificado"
-    prompt_final = (
-        f"{prompt}\n\n"
-        f"Foram detectados os seguintes materiais na imagem: {materiais_texto}.\n\n"
-        f"Com base nesses materiais, escreva um texto claro, direto e fácil de entender, explicando como a pessoa deve armazenar corretamente cada um deles até que o serviço de coleta passe para retirar. "
-        f"Não mencione locais de descarte nem centros de reciclagem — só diga como guardar de forma segura, higiênica e responsável dentro de casa.\n\n"
-        f"Importante: responda apenas com o texto da orientação. Não use formatação extra, listas, JSON ou estrutura de dicionário. Não adicione explicações fora da mensagem. Apenas o texto direto com as instruções.\n"
-        f"Exemplo de resposta: 'Garrafas PET devem ser lavadas, secas e armazenadas em sacos plásticos transparentes. Caixas de papelão podem ser desmontadas e mantidas em local seco até a coleta.'\n"
-    )
+    if materiais:
+        materiais_texto = ", ".join(materiais)
+        prompt_final = (
+            f"{prompt}\n\n"
+            f"Foram detectados os seguintes materiais na imagem: {materiais_texto}.\n\n"
+            f"Com base nesses materiais, escreva um texto claro, direto e fácil de entender, explicando como a pessoa deve armazenar corretamente cada um deles até que o serviço de coleta passe para retirar. "
+            f"Não mencione locais de descarte nem centros de reciclagem — só diga como guardar de forma segura, higiênica e responsável dentro de casa.\n\n"
+            f"Importante: responda apenas com o texto da orientação. Não use formatação extra, listas, JSON ou estrutura de dicionário. Não adicione explicações fora da mensagem. Apenas o texto direto com as instruções.\n"
+            f"Exemplo de resposta: 'Garrafas PET devem ser lavadas, secas e armazenadas em sacos plásticos transparentes. Caixas de papelão podem ser desmontadas e mantidas em local seco até a coleta.'\n"
+        )
+    else:
+        prompt_final = (
+            f"{prompt}\n\n"
+            f"Responda de forma clara, direta e fácil de entender, fornecendo orientações sobre reciclagem ou descarte responsável, mesmo que não haja materiais identificados em uma imagem. "
+            f"Se a dúvida for geral, explique como separar, armazenar ou lidar com resíduos de maneira segura e higiênica em casa, sem mencionar locais de descarte ou centros de reciclagem.\n\n"
+            f"Importante: responda apenas com o texto da orientação. Não use formatação extra, listas, JSON ou estrutura de dicionário. Não adicione explicações fora da mensagem. Apenas o texto direto com as instruções.\n"
+        )
 
     role = "voce é um especialista em reciclagem e meio ambiente. Seu trabalho é fornecer orientações claras e precisas sobre como reciclar ou descartar corretamente os materiais."
     return prompt_final, role
